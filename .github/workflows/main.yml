@@ -24,4 +24,5 @@ jobs:
           pip install numpy matplotlib
 
       - name: Run Validation Script
-        run: python .github/workflows/script.py
+        working-directory: .github/workflows
+        run: python script.py
