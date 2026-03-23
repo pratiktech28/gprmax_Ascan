@@ -1,45 +1,47 @@
-[![A-scan Validation CI](https://github.com/pratiktech28/gprmax_Ascan/actions/workflows/main.yml/badge.svg)](https://github.com/pratiktech28/gprmax_Ascan/actions/workflows/main.yml)
-![download](https://github.com/user-attachments/assets/e4cb7568-886e-4caf-a1a7-79e89849cfd0)
-![download](https://github.com/user-attachments/assets/671e69ad-19c1-4e87-95a1-345359280c7f)
-**⚡ ASCN: Asynchronous Scalable Computing Node for gprMax**
-**🎯 Overview**
-ASCN is the core execution engine of the Trident Pipeline. It handles heavy-duty gprMax physics simulations asynchronously, ensuring high availability and fault-tolerant processing. By decoupling task submission from execution, ASCN allows the system to scale horizontally across distributed cloud nodes._
+# 🔱 ASCN: Asynchronous Scalable Computing Node
+
+<div align="center">
+  <img src="https://img.shields.io/badge/GSoC-2026-orange?style=for-the-badge&logo=google" />
+  <img src="https://img.shields.io/badge/RabbitMQ-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white" />
+  <img src="https://img.shields.io/badge/Kubernetes-326ce5?style=for-the-badge&logo=kubernetes&logoColor=white" />
+</div>
+
 ---
-**🏗️ Technical Architecture**
-The ASCN node operates as a high-performance worker that consumes simulation tasks from a distributed message broker.
 
-**🔌 Key Components:**
-Task Broker (RabbitMQ): Orchestrates asynchronous message passing between the CI/CD pipeline and the worker nodes.
-In-Memory Cache (Redis): Manages transient task states, ensuring real-time monitoring of simulation progress.
-Data Persistence (PostgreSQL): Stores detailed metadata and regression results for long-term analysis.
-Workflow Engine (Airflow): Schedules and monitors the end-to-end simulation DAGs.
+## 🚀 Project Overview
+The **ASCN (Asynchronous Scalable Computing Node)** is the core engine of the Trident Pipeline. It leverages a distributed architecture to handle high-intensity **gprMax** simulations asynchronously.
 
+### 🏗️ Technical Architecture flow
+<div align="center">
+  <img src="image_5ab864.png" width="800px" alt="ASCN Logic Flow">
+  <p><i>Figure 1: High-Level ASCN Logic & Task Queue Flow</i></p>
+</div>
 
-<img width="300" height="300" alt="ascan_comparison" src="https://github.com/user-attachments/assets/a3a55861-d91a-4cd1-9b19-04206214d11f" />
-
-
-**🛠️ The "Asynchronous" Logic**
-Producer: The Trident CI pipeline (GitHub Actions) pushes a simulation job into the Simulation_Queue.
-Consumer (ASCN Worker): Multiple Dockerized workers listen to the queue.
-Execution: An available worker pulls the job, runs the gprMax solver in an isolated container, and streams logs.
-Validation: Results are pushed to the validation engine, and the task status is updated in Redis/Postgres.
 ---
-📈 Scalability (10x to 100x)
-ASCN is designed for Elastic Scaling. Using Kubernetes HPA, the number of ASCN worker nodes automatically increases based on the number of pending messages in RabbitMQ, allowing for massive parallelization of electromagnetic wave simulations.
 
-**🚀 Deployment**
-Local Development (Docker)
-Bash
-# Build and run the ASCN worker environment
-docker-compose up --build
-Environment Variables
-Ensure you have the following configured:
+## 📊 A-scan Comparison & Validation
+Automation is meaningless without precision. ASCN performs real-time A-scan comparison to ensure every simulation matches the **"Golden Truth"** metadata.
 
-RABBITMQ_URL: Connection string for the message broker.
+<div align="center">
+  <img src="ascan_comparison.png" width="700px" alt="A-scan Comparison Graph">
+  <p><i>Figure 2: Physics-Based Validation (Simulated vs. Reference Data)</i></p>
+</div>
 
-REDIS_HOST: Tracking server address.
+---
 
-DB_CONNECTION: Postgres link for regression metadata.
+## 🛠️ Tech Stack & Role
+| Component | Technology | Role in Trident Pipeline |
+| :--- | :--- | :--- |
+| **Message Broker** | `RabbitMQ` | Decoupling task submission from execution. |
+| **State Management** | `Redis` | Real-time tracking of node health & task status. |
+| **Task Scheduling** | `Airflow` | Managing complex simulation DAGs. |
+| **Elastic Scaling** | `K8s HPA` | Dynamic scaling from 10x to 100x nodes. |
 
-**👨‍💻 Author**
-**Prateek Sharma** GSoC '26 Applicant | Cloud-Native Infrastructure Engineer
+---
+
+## ⚡ Core Technical Logic
+By implementing an **Asynchronous Model**, we eliminate system timeouts and resource starvation. The system is designed for **high-throughput** processing, ensuring 100% reliability for researchers worldwide.
+
+<p align="center">
+  <b>Developed by Prateek Sharma | GSoC '26 Applicant @gprMax</b>
+</p>
