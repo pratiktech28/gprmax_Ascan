@@ -1,3 +1,4 @@
+[![A-scan Validation CI](https://github.com/pratiktech28/gprmax_Ascan/actions/workflows/main.yml/badge.svg)](https://github.com/pratiktech28/gprmax_Ascan/actions/workflows/main.yml)
 # 🔱 ASCN: Asynchronous Scalable Computing Node
 
 <div align="center">
